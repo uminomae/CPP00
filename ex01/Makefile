@@ -1,7 +1,7 @@
 #=============================
 #flags
 #=============================
-NAME	:= megaphone
+NAME	:= PhoneBook
 CXX     := c++
 CXXFLAGS:= -Wall -Wextra -Werror -std=c++98
 RM		:= rm -f
@@ -9,7 +9,8 @@ RM		:= rm -f
 #src
 #=============================
 SRCS	:= \
-megaphone.cpp
+PhoneBook.cpp \
+Debug.cpp
 
 OBJS	= $(SRCS:%.cpp=%.o)
 
@@ -25,5 +26,9 @@ fclean:	clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+s:
+	make re
+	sh test.sh
 
 .PHONY  : all clean fclean re

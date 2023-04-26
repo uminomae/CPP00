@@ -14,8 +14,8 @@ void puts_color(std::string s, std::string color){
 	std::cout << color << s << "\033[m" << std::endl;
 }
 
-void print_summary_col(std::string s){
-	std::cout.setf(std::ios::right, std::ios::adjustfield);
+void print_summary_col(std::string &s){
+	std::cout << std::right;
 	if (s.size() > COL_W)
 		std::cout << std::setw(COL_W - 1) << s.substr(0, 9) << "."  << "|";
 	else
@@ -24,7 +24,9 @@ void print_summary_col(std::string s){
 
 void PhoneBook::print_summary(int i){
 	std::cout << "\033[38;5;201m";
-	print_summary_col(std::to_string(i));
+	std::string id = std::to_string(i);
+	print_summary_col(id);
+	// print_summary_col(std::to_string(i));
 	print_summary_col(book[i].f_name);
 	print_summary_col(book[i].l_name);
 	print_summary_col(book[i].n_name);
@@ -32,15 +34,17 @@ void PhoneBook::print_summary(int i){
 	std::cout << "\033[m";
 }
 
-void print_line(int w, std::string key, std::string s){
-	std::cout.setf(std::ios::left, std::ios::adjustfield);
+void print_line(int w, std::string key, std::string &s){
+	std::cout << std::left;
 	std::cout << std::setw(w) << key;
 	std::cout << ":" << s << std::endl;
 }
 
 void PhoneBook::print_contact(int w, int idx){
 	std::cout << "\033[38;5;200m";
-	print_line(w, "index", std::to_string(idx));
+	std::cout << std::right;
+	std::string id = std::to_string(idx);
+	print_line(w, "index", id);
 	print_line(w, "first name", book[idx].f_name);
 	print_line(w, "last name", book[idx].l_name);
 	print_line(w, "nickname", book[idx].n_name);
@@ -60,13 +64,13 @@ void PhoneBook::search_contact(){
 		try{
 			std::cin >> idx;
 		}catch(...){
-			puts_color("exception accepted", "\033[31m");
+			puts_color("Exception accepted", "\033[31m");
 			exit(1);
 		}
 		if (std::cin.fail()){
 			std::cin.clear();
 			std::cin.ignore(1024, '\n');
-			puts_color("invalid", "\033[31m");
+			puts_color("Error in cin", "\033[31m");
 			continue;
 		}
 		if (std::cin.eof()){
@@ -79,7 +83,7 @@ void PhoneBook::search_contact(){
 			print_contact(COL_W, idx);
 		}
 		else{
-			puts_color("invalid---2", "\033[31m");
+			puts_color("Invalid index value", "\033[31m");
 		}
 	}
 }
@@ -94,7 +98,7 @@ void PhoneBook::read_field(std::string &field, std::string s, std::string color)
 #endif
 		std::cin >> field;
 	}catch(...){
-		puts_color("exception accepted", "\033[31m");
+		puts_color("Exception accepted", "\033[31m");
 		exit(1);
 	}
 	if (std::cin.eof()){
@@ -130,7 +134,7 @@ int PhoneBook::run_cmd(std::string &s){
 	else if (s == "EXIT")
 		exit(0);
 	else{
-		puts_color("invalid---1", "\033[31m");
+		puts_color("Invalid command", "\033[31m");
 	}
 	return 0;
 }

@@ -49,3 +49,42 @@ expect -c "
 	expect \"CMD\"
 	exit 0
 "
+#=======================================================
+
+expect -c "
+	set timeout ${timeout}
+	spawn ${cmd}
+
+	set i 0
+	while {\$i < $max_r} {
+		expect \"CMD\"
+		send \"ADD\n\"
+		send \"${first}\n\"
+		send \"${last}\n\"
+		send \"${nickname}\n\"
+		send \"${phone}\n\"
+		send \"${secret}\n\"
+		incr i 1
+	}
+
+
+	expect \"CMD\"
+	send \"SEARCH\n\"
+	expect \"|\"
+	send \"0\n\"
+
+	expect \"CMD\"
+	send \"SEARCH\n\"
+	expect \"|\"
+	send \"1\n\"
+
+	expect \"CMD\"
+	send \"SEARCH\n\"
+	expect \"|\"
+	send \"abc\n\"
+
+	expect \"CMD\"
+	send \"EXIT\n\"
+	expect \"CMD\"
+	exit 0
+"

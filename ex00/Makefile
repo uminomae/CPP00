@@ -26,4 +26,8 @@ fclean:	clean
 
 re: fclean all
 
+s:
+	make
+	sh ./test/test.sh
+
 .PHONY  : all clean fclean re

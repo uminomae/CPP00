@@ -26,7 +26,6 @@ void PhoneBook::print_summary(int i){
 	std::cout << "\033[38;5;201m";
 	std::string id = std::to_string(i);
 	print_summary_col(id);
-	// print_summary_col(std::to_string(i));
 	print_summary_col(book[i].f_name);
 	print_summary_col(book[i].l_name);
 	print_summary_col(book[i].n_name);

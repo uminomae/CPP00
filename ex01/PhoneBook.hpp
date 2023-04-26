@@ -7,15 +7,17 @@ const int MAX_C = 8;
 
 class PhoneBook {
 private:
-	Contact book[MAX_C + 1];
+	Contact book[MAX_C];
 	int num_data;
 public:
 	PhoneBook();
 	void add_contact();
 	void search_contact();
 	void exit_book();
-	void print_spec_row(int i);
-	void print_all(int w, int idx);
+	int run_cmd(std::string &s);
+	void read_field(std::string &field, std::string s, std::string color);
+	void print_summary(int i);
+	void print_contact(int w, int idx);
 	void debug_show();
 };
 

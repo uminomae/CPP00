@@ -18,73 +18,107 @@ phone="\${i}-012-345-678"
 secret="secret\$i"
 max_r=10
 
-expect -c "
-	set timeout ${timeout}
-	spawn ${cmd}
+# expect -c "
+# 	set timeout ${timeout}
+# 	spawn ${cmd}
 
-	set i 0
-	while {\$i < $max_r} {
-		expect \"CMD\"
-		send \"ADD\n\"
-		send \"${first}\n\"
-		send \"${last}\n\"
-		send \"${nickname}\n\"
-		send \"${phone}\n\"
-		send \"${secret}\n\"
-		incr i 1
-	}
+# 	set i 0
+# 	while {\$i < $max_r} {
+# 		expect \"Please enter command\"
+# 		send \"ADD\n\"
+# 		send \"${first}\n\"
+# 		send \"${last}\n\"
+# 		send \"${nickname}\n\"
+# 		send \"${phone}\n\"
+# 		send \"${secret}\n\"
+# 		incr i 1
+# 	}
 
-	expect \"CMD\"
-	send \"SEARCH\n\"
-	expect \"|\"
-	send \"0\n\"
+# 	expect \"Please enter command\"
+# 	send \"SEARCH\n\"
+# 	expect \"|\"
+# 	send \"0\n\"
 
-	expect \"CMD\"
-	send \"SEARCH\n\"
-	expect \"|\"
-	send \"10\n\"
+# 	expect \"Please enter command\"
+# 	send \"SEARCH\n\"
+# 	expect \"|\"
+# 	send \"10\n\"
 
-	# expect \"CMD\"
-	send \"EXIT\n\"
-	expect \"CMD\"
-	exit 0
-"
+# 	# expect \"Please enter command\"
+# 	send \"EXIT\n\"
+# 	expect \"Please enter command\"
+# 	exit 0
+# "
+# #=======================================================
+
+# expect -c "
+# 	set timeout ${timeout}
+# 	spawn ${cmd}
+
+# 	set i 0
+# 	while {\$i < $max_r} {
+# 		expect \"Please enter command\"
+# 		send \"ADD\n\"
+# 		send \"${first}\n\"
+# 		send \"${last}\n\"
+# 		send \"${nickname}\n\"
+# 		send \"${phone}\n\"
+# 		send \"${secret}\n\"
+# 		incr i 1
+# 	}
+
+
+# 	expect \"Please enter command\"
+# 	send \"SEARCH\n\"
+# 	expect \"|\"
+# 	send \"0\n\"
+
+# 	expect \"Please enter command\"
+# 	send \"SEARCH\n\"
+# 	expect \"|\"
+# 	send \"9\n\"
+
+# 	expect \"Please enter command\"
+# 	send \"SEARCH\n\"
+# 	expect \"|\"
+# 	send \"abc\n\"
+
+# 	# expect \"Please enter command\"
+# 	send \"EXIT\n\"
+# 	expect \"Please enter command\"
+# 	exit 0
+# "
 #=======================================================
 
+
 expect -c "
 	set timeout ${timeout}
 	spawn ${cmd}
 
 	set i 0
 	while {\$i < $max_r} {
-		expect \"CMD\"
+		expect \"Please enter command\"
 		send \"ADD\n\"
+		expect \"name\"
 		send \"${first}\n\"
+		expect \"name\"
 		send \"${last}\n\"
+		expect \"name\"
 		send \"${nickname}\n\"
+		expect \"num\"
 		send \"${phone}\n\"
+		expect \"sec\"
 		send \"${secret}\n\"
 		incr i 1
 	}
 
-
-	expect \"CMD\"
+	expect \"Please enter command\"
 	send \"SEARCH\n\"
 	expect \"|\"
-	send \"0\n\"
-
-	expect \"CMD\"
-	send \"SEARCH\n\"
-	expect \"|\"
-	send \"1\n\"
-
-	expect \"CMD\"
-	send \"SEARCH\n\"
-	expect \"|\"
-	send \"abc\n\"
-
-	expect \"CMD\"
+	send \"a\n\"
+	
+	# expect \"Please enter command\"
 	send \"EXIT\n\"
-	expect \"CMD\"
+	expect \"Please enter command\"
 	exit 0
 "

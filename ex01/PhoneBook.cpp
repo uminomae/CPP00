@@ -4,12 +4,6 @@
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
 
-const std::string PINK1 = "\033[38;5;201m";
-const std::string PINK2 = "\033[38;5;199m";
-const std::string RED = "\033[31m";
-const std::string RESET_COLOR = "\033[m";
-
-
 PhoneBook::PhoneBook(){
 	num_data = 0;
 }
@@ -117,6 +111,7 @@ void PhoneBook::add_contact(){
 		}
 		num_data = i;
 	}
+	puts_color("Enter contact in the field", PINK2);
 	read_field(book[num_data].f_name, "first name", PINK1);
 	read_field(book[num_data].l_name, "last name", PINK1);
 	read_field(book[num_data].n_name, "nickname", PINK1);
@@ -126,10 +121,8 @@ void PhoneBook::add_contact(){
 }
 
 int PhoneBook::run_cmd(std::string &s){
-	if (s == "ADD"){
-		puts_color("Enter contact in the field", PINK2);
+	if (s == "ADD")
 		add_contact();
-	}
 	else if (s == "SEARCH")
 		search_contact();
 	else if (s == "EXIT")
@@ -164,17 +157,13 @@ int read_cmd(std::string &s){
 int main(){
 	PhoneBook pb;
 	std::string s;
-
 	while(1){
 		read_cmd(s);
 		pb.run_cmd(s);
 		s.clear();
-	}
-	std::cout << "break" << std::endl;
-
 #ifdef DEBUG
 	pb.debug_show();
 #endif
-
+	}
 	return 0;
 }

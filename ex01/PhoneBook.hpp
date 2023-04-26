@@ -5,6 +5,10 @@
 
 const int MAX_C = 8;
 const int COL_W = 10;
+const std::string PINK1 = "\033[38;5;201m";
+const std::string PINK2 = "\033[38;5;199m";
+const std::string RED = "\033[31m";
+const std::string RESET_COLOR = "\033[m";
 
 class PhoneBook {
 private:

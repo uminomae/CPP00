@@ -4,14 +4,18 @@
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
 
-const int COL_W = 10;
+const std::string PINK1 = "\033[38;5;201m";
+const std::string PINK2 = "\033[38;5;199m";
+const std::string RED = "\033[31m";
+const std::string RESET_COLOR = "\033[m";
+
 
 PhoneBook::PhoneBook(){
 	num_data = 0;
 }
 
 void puts_color(std::string s, std::string color){
-	std::cout << color << s << "\033[m" << std::endl;
+	std::cout << color << s << RESET_COLOR << std::endl;
 }
 
 void print_summary_col(std::string &s){
@@ -23,14 +27,13 @@ void print_summary_col(std::string &s){
 }
 
 void PhoneBook::print_summary(int i){
-	std::cout << "\033[38;5;201m";
 	std::string id = std::to_string(i);
+	std::cout << PINK1;
 	print_summary_col(id);
 	print_summary_col(book[i].f_name);
 	print_summary_col(book[i].l_name);
 	print_summary_col(book[i].n_name);
-	std::cout << std::endl;
-	std::cout << "\033[m";
+	std::cout << RESET_COLOR << std::endl;
 }
 
 void print_line(int w, std::string key, std::string &s){
@@ -40,16 +43,15 @@ void print_line(int w, std::string key, std::string &s){
 }
 
 void PhoneBook::print_contact(int w, int idx){
-	std::cout << "\033[38;5;200m";
-	std::cout << std::right;
 	std::string id = std::to_string(idx);
+	std::cout << PINK1;
 	print_line(w, "index", id);
 	print_line(w, "first name", book[idx].f_name);
 	print_line(w, "last name", book[idx].l_name);
 	print_line(w, "nickname", book[idx].n_name);
 	print_line(w, "p_number", book[idx].p_number);
 	print_line(w, "d_secret", book[idx].d_secret);
-	std::cout << "\033[m";
+	std::cout << RESET_COLOR;
 }
 
 void PhoneBook::search_contact(){
@@ -59,21 +61,21 @@ void PhoneBook::search_contact(){
 	
 	bool is_put = false;
 	while (!is_put){
-		puts_color("Please enter the index", "\033[38;5;199m");
+		puts_color("Please enter the index", PINK2);
 		try{
 			std::cin >> idx;
 		}catch(...){
-			puts_color("Exception accepted", "\033[31m");
+			puts_color("Exception accepted", RED);
 			exit(1);
 		}
 		if (std::cin.fail()){
 			std::cin.clear();
 			std::cin.ignore(1024, '\n');
-			puts_color("Error in cin", "\033[31m");
+			puts_color("Error in cin", RED);
 			continue;
 		}
 		if (std::cin.eof()){
-			puts_color("EOF accepted", "\033[31m");
+			puts_color("EOF accepted", RED);
 			exit(1);
 		}
 
@@ -82,7 +84,7 @@ void PhoneBook::search_contact(){
 			print_contact(COL_W, idx);
 		}
 		else{
-			puts_color("Invalid index value", "\033[31m");
+			puts_color("Invalid index value", RED);
 		}
 	}
 }
@@ -97,11 +99,11 @@ void PhoneBook::read_field(std::string &field, std::string s, std::string color)
 #endif
 		std::cin >> field;
 	}catch(...){
-		puts_color("Exception accepted", "\033[31m");
+		puts_color("Exception accepted", RED);
 		exit(1);
 	}
 	if (std::cin.eof()){
-		puts_color("EOF accepted", "\033[31m");
+		puts_color("EOF accepted", RED);
 		exit(1);
 	}
 }
@@ -115,17 +117,17 @@ void PhoneBook::add_contact(){
 		}
 		num_data = i;
 	}
-	read_field(book[num_data].f_name, "first name", "\033[38;5;201m");
-	read_field(book[num_data].l_name, "last name", "\033[38;5;201m");
-	read_field(book[num_data].n_name, "nickname", "\033[38;5;201m");
-	read_field(book[num_data].p_number, "phone number", "\033[38;5;201m");
-	read_field(book[num_data].d_secret, "darkest secret", "\033[38;5;201m");
+	read_field(book[num_data].f_name, "first name", PINK1);
+	read_field(book[num_data].l_name, "last name", PINK1);
+	read_field(book[num_data].n_name, "nickname", PINK1);
+	read_field(book[num_data].p_number, "phone number", PINK1);
+	read_field(book[num_data].d_secret, "darkest secret", PINK1);
 	num_data++;
 }
 
 int PhoneBook::run_cmd(std::string &s){
 	if (s == "ADD"){
-		puts_color("Enter contact in the field", "\033[38;5;199m");
+		puts_color("Enter contact in the field", PINK2);
 		add_contact();
 	}
 	else if (s == "SEARCH")
@@ -133,25 +135,25 @@ int PhoneBook::run_cmd(std::string &s){
 	else if (s == "EXIT")
 		exit(0);
 	else
-		puts_color("Invalid command", "\033[31m");
+		puts_color("Invalid command", RED);
 	return 0;
 }
 
 // #define DEBUG2
 
 int read_cmd(std::string &s){
-	puts_color("Please enter command ADD or SEARCH or EXIT)",  "\033[38;5;199m");
+	puts_color("Please enter command ADD or SEARCH or EXIT)",  PINK2);
 	try{
 #ifdef DEBUG2
 	throw("error");
 #endif
 		std::cin >> s;
 	}catch(...){
-		puts_color("exception accepted", "\033[31m");
+		puts_color("exception accepted", RED);
 		exit(1);
 	}
 	if (std::cin.eof()){
-		puts_color("EOF accepted", "\033[31m");
+		puts_color("EOF accepted", RED);
 		exit(1);
 	}
 	return 0;

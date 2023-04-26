@@ -4,6 +4,7 @@
 #include "Contact.hpp"
 
 const int MAX_C = 8;
+const int COL_W = 10;
 
 class PhoneBook {
 private:

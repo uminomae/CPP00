@@ -18,76 +18,6 @@ phone="\${i}-012-345-678"
 secret="secret\$i"
 max_r=10
 
-# expect -c "
-# 	set timeout ${timeout}
-# 	spawn ${cmd}
-
-# 	set i 0
-# 	while {\$i < $max_r} {
-# 		expect \"Please enter command\"
-# 		send \"ADD\n\"
-# 		send \"${first}\n\"
-# 		send \"${last}\n\"
-# 		send \"${nickname}\n\"
-# 		send \"${phone}\n\"
-# 		send \"${secret}\n\"
-# 		incr i 1
-# 	}
-
-# 	expect \"Please enter command\"
-# 	send \"SEARCH\n\"
-# 	expect \"|\"
-# 	send \"0\n\"
-
-# 	expect \"Please enter command\"
-# 	send \"SEARCH\n\"
-# 	expect \"|\"
-# 	send \"10\n\"
-
-# 	# expect \"Please enter command\"
-# 	send \"EXIT\n\"
-# 	expect \"Please enter command\"
-# 	exit 0
-# "
-# #=======================================================
-
-# expect -c "
-# 	set timeout ${timeout}
-# 	spawn ${cmd}
-
-# 	set i 0
-# 	while {\$i < $max_r} {
-# 		expect \"Please enter command\"
-# 		send \"ADD\n\"
-# 		send \"${first}\n\"
-# 		send \"${last}\n\"
-# 		send \"${nickname}\n\"
-# 		send \"${phone}\n\"
-# 		send \"${secret}\n\"
-# 		incr i 1
-# 	}
-
-
-# 	expect \"Please enter command\"
-# 	send \"SEARCH\n\"
-# 	expect \"|\"
-# 	send \"0\n\"
-
-# 	expect \"Please enter command\"
-# 	send \"SEARCH\n\"
-# 	expect \"|\"
-# 	send \"9\n\"
-
-# 	expect \"Please enter command\"
-# 	send \"SEARCH\n\"
-# 	expect \"|\"
-# 	send \"abc\n\"
-
-# 	# expect \"Please enter command\"
-# 	send \"EXIT\n\"
-# 	expect \"Please enter command\"
-# 	exit 0
-# "
 #=======================================================
 
 
@@ -114,11 +44,29 @@ expect -c "
 
 	expect \"Please enter command\"
 	send \"SEARCH\n\"
-	expect \"|\"
+	expect \"Please\"
 	send \"a\n\"
 	
-	# expect \"Please enter command\"
-	send \"EXIT\n\"
+	expect \"Please\"
+	send \"13\n\"
+
+	expect \"Please\"
+	send \"0\n\"
+
 	expect \"Please enter command\"
+	send \"SEARCH\n\"
+	expect \"Please\"
+	send \"6\n\"
+
+	expect \"Please enter command\"
+	send \"SEARCh\n\"
+
+	expect \"Please enter command\"
+	send \"\n\"
+	send \"a\n\"
+
+	expect \"Please\"
+	send \"EXIT\n\"
+	expect \"Please\"
 	exit 0
 "

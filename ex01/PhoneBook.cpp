@@ -132,9 +132,8 @@ int PhoneBook::run_cmd(std::string &s){
 		search_contact();
 	else if (s == "EXIT")
 		exit(0);
-	else{
+	else
 		puts_color("Invalid command", "\033[31m");
-	}
 	return 0;
 }
 

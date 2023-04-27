@@ -105,15 +105,15 @@ bool PhoneBook::print_specified(){
 		puts_color("Exception accepted", RED);
 		exit(1);
 	}
+	if (std::cin.eof()){
+		puts_color("EOF accepted", RED);
+		exit(1);
+	}
 	if (std::cin.fail()){
 		std::cin.clear();
 		std::cin.ignore(1024, '\n');
 		puts_color("Error in cin", RED);
 		return false;
-	}
-	if (std::cin.eof()){
-		puts_color("EOF accepted", RED);
-		exit(1);
 	}
 
 	if (0 <= idx && idx < num_data){

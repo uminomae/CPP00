@@ -9,8 +9,8 @@ RM		:= rm -f
 #src
 #=============================
 SRCS	:= \
+main.cpp \
 PhoneBook.cpp \
-Debug.cpp
 
 OBJS	= $(SRCS:%.cpp=%.o)
 
